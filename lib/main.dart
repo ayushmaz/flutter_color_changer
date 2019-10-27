@@ -17,11 +17,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int index = 0;
+  List<Color> myColors = [
+    Colors.orange,
+    Colors.cyan,
+    Colors.deepPurple,
+    Colors.deepOrange,
+    Colors.red,
+    Colors.green
+  ];
+  void indexIncrement(){
+    if (index< myColors.length- 1){
+      index++;
+    }
+    else{
+      index = 0;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: myColors[index],
         title: Text("Flutter Color Changer"),
       ),
 
@@ -29,14 +46,18 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Expanded(
             child: FlutterLogo(
-              colors: Colors.deepPurple,
+              colors: myColors[index],
               size: double.infinity,
             ),
           ),
           RaisedButton(
-            onPressed: (){},
+            onPressed: (){
+              setState(() {
+                indexIncrement();
+              });
+            },
             child: Text("Change" , style: TextStyle(color: Colors.white),),
-            color: Colors.deepPurple,
+            color: myColors[index]
           )
         ],
       ),
